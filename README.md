@@ -53,7 +53,7 @@ API будет доступен по адресу `http://localhost:8000`
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
 
-## Конечные точки API
+## Ручки API
 
 ### Аутентификация
 - `POST /auth/register` - Регистрация нового пользователя
