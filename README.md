@@ -1,86 +1,86 @@
-# URL Shortener API
+# API для Сокращения URL
 
-A modern URL shortener service built with FastAPI, featuring authentication, analytics, and link previews.
+Современный сервис для сокращения URL-адресов, построенный на FastAPI, с функциями аутентификации, аналитики и предпросмотра ссылок.
 
-## Features
+## Возможности
 
-- URL shortening with custom aliases
-- User authentication with JWT tokens
-- Link analytics (click count, last accessed)
-- Link preview generation
-- Link expiration
-- URL validation and safety checks
-- CORS support
+- Сокращение URL с пользовательскими алиасами
+- Аутентификация пользователей с помощью JWT токенов
+- Аналитика ссылок (количество переходов, последний доступ)
+- Генерация предпросмотра ссылок
+- Срок действия ссылок
+- Проверка валидности и безопасности URL
+- Поддержка CORS
 
-## Tech Stack
+## Технологический стек
 
 - FastAPI
 - SQLAlchemy
-- SQLite (can be easily switched to PostgreSQL)
+- SQLite (легко переключается на PostgreSQL)
 - Pydantic
-- JWT Authentication
-- BeautifulSoup4 for link previews
+- JWT Аутентификация
+- BeautifulSoup4 для предпросмотра ссылок
 
-## Setup
+## Установка
 
-1. Clone the repository:
+1. Клонируйте репозиторий:
 ```bash
 git clone https://github.com/yourusername/url-shortener.git
 cd url-shortener
 ```
 
-2. Create and activate a virtual environment:
+2. Создайте и активируйте виртуальное окружение:
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Для Windows: venv\Scripts\activate
 ```
 
-3. Install dependencies:
+3. Установите зависимости:
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Run the application:
+4. Запустите приложение:
 ```bash
 uvicorn app.main:app --reload
 ```
 
-The API will be available at `http://localhost:8000`
+API будет доступен по адресу `http://localhost:8000`
 
-## API Documentation
+## Документация API
 
-Once the server is running, you can access:
+После запуска сервера вы можете получить доступ к:
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
 
-## API Endpoints
+## Конечные точки API
 
-### Authentication
-- `POST /auth/register` - Register a new user
-- `POST /auth/login` - Login and get access token
-- `POST /auth/login/json` - Login with JSON data
+### Аутентификация
+- `POST /auth/register` - Регистрация нового пользователя
+- `POST /auth/login` - Вход и получение токена доступа
+- `POST /auth/login/json` - Вход с данными JSON
 
-### Links
-- `POST /links/shorten` - Create a new short link
-- `GET /{short_code}` - Redirect to original URL
-- `DELETE /links/{short_code}` - Delete a link
-- `PUT /links/{short_code}` - Update a link
-- `GET /links/{short_code}/stats` - Get link statistics
-- `GET /links/search` - Search for a link by URL
+### Ссылки
+- `POST /links/shorten` - Создание новой короткой ссылки
+- `GET /{short_code}` - Перенаправление на оригинальный URL
+- `DELETE /links/{short_code}` - Удаление ссылки
+- `PUT /links/{short_code}` - Обновление ссылки
+- `GET /links/{short_code}/stats` - Получение статистики ссылки
+- `GET /links/search` - Поиск ссылки по URL
 
-## Environment Variables
+## Переменные окружения
 
-Create a `.env` file in the root directory with the following variables:
+Создайте файл `.env` в корневой директории со следующими переменными:
 ```
-SECRET_KEY=your-secret-key
+SECRET_KEY=ваш-секретный-ключ
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
-## Deployment
+## Развертывание
 
-This application is configured for deployment on Render.io. The `render.yaml` file contains the necessary configuration.
+Это приложение настроено для развертывания на Render.io. Файл `render.yaml` содержит необходимую конфигурацию.
 
-## License
+## Лицензия
 
 MIT License 
