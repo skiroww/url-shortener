@@ -20,10 +20,21 @@ services:
           type: redis
           name: url-shortener-redis
           property: connectionString
-    databases:
-      - name: url_shortener_db
-        databaseName: url_shortener
-        user: url_shortener
+
+  - type: pserv
+    name: url_shortener_db
+    env: docker
+    disk:
+      name: data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 10
+    envVars:
+      - key: POSTGRES_DB
+        value: url_shortener
+      - key: POSTGRES_USER
+        value: url_shortener
+      - key: POSTGRES_PASSWORD
+        generateValue: true
 
   - type: redis
     name: url-shortener-redis
