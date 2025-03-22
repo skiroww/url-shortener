@@ -1,6 +1,7 @@
 # API для Сокращения URL
 
 Современный сервис для сокращения URL-адресов, построенный на FastAPI, с функциями аутентификации, аналитики и предпросмотра ссылок.
+Сервис развернут на платформе Render - https://url-shortener-e3rb.onrender.com/docs
 
 ## Возможности
 
@@ -53,7 +54,7 @@ API будет доступен по адресу `http://localhost:8000`
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
 
-## Конечные точки API
+## Ручки API
 
 ### Аутентификация
 - `POST /auth/register` - Регистрация нового пользователя
