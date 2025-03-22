@@ -24,8 +24,8 @@ services:
       - name: url_shortener_db
         databaseName: url_shortener
         user: url_shortener
-    services:
-      - type: redis
-        name: url-shortener-redis
-        ipAllowList: []
-        plan: free 
+
+  - type: redis
+    name: url-shortener-redis
+    ipAllowList: []
+    plan: free 
