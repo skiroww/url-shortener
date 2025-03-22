@@ -68,6 +68,70 @@ API будет доступен по адресу `http://localhost:8000`
 - `GET /links/{short_code}/stats` - Получение статистики ссылки
 - `GET /links/search` - Поиск ссылки по URL
 
+## Примеры запросов
+
+### Регистрация пользователя
+```bash
+curl -X POST "http://localhost:8000/auth/register" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "email": "user@example.com",
+           "password": "strongpassword123"
+         }'
+```
+
+### Вход в систему
+```bash
+curl -X POST "http://localhost:8000/auth/login" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "username=user@example.com&password=strongpassword123"
+```
+
+### Создание короткой ссылки
+```bash
+curl -X POST "http://localhost:8000/links/shorten" \
+     -H "Authorization: Bearer your_access_token" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "url": "https://example.com/very-long-url",
+           "custom_alias": "my-short-link",
+           "expires_at": "2024-12-31T23:59:59"
+         }'
+```
+
+### Получение статистики ссылки
+```bash
+curl -X GET "http://localhost:8000/links/my-short-link/stats" \
+     -H "Authorization: Bearer your_access_token"
+```
+
+## Структура базы данных
+
+### Таблица Users
+- `id`: INTEGER (Primary Key) - Уникальный идентификатор пользователя
+- `email`: VARCHAR - Email пользователя (уникальный)
+- `hashed_password`: VARCHAR - Хешированный пароль
+- `created_at`: TIMESTAMP - Дата создания аккаунта
+
+### Таблица Links
+- `id`: INTEGER (Primary Key) - Уникальный идентификатор ссылки
+- `user_id`: INTEGER (Foreign Key) - ID пользователя-владельца
+- `original_url`: VARCHAR - Оригинальный URL
+- `short_code`: VARCHAR - Короткий код ссылки (уникальный)
+- `custom_alias`: VARCHAR - Пользовательский алиас (опциональный)
+- `created_at`: TIMESTAMP - Дата создания ссылки
+- `expires_at`: TIMESTAMP - Дата истечения срока действия
+- `click_count`: INTEGER - Количество переходов
+- `last_accessed`: TIMESTAMP - Время последнего перехода
+
+### Таблица LinkPreviews
+- `id`: INTEGER (Primary Key) - Уникальный идентификатор предпросмотра
+- `link_id`: INTEGER (Foreign Key) - ID связанной ссылки
+- `title`: VARCHAR - Заголовок страницы
+- `description`: TEXT - Описание страницы
+- `image_url`: VARCHAR - URL изображения
+- `created_at`: TIMESTAMP - Дата создания предпросмотра
+
 ## Переменные окружения
 
 Создайте файл `.env` в корневой директории со следующими переменными:
